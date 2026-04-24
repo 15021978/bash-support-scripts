@@ -27,11 +27,45 @@ Searches logs for specific keywords or errors.
 ---
 
 ### ⚙️ service_status.sh
-Checks the status of system services using `systemctl`.
+
+Checks the status of a systemd service and displays recent logs for troubleshooting.
 
 👉 Skills:
-- Service management
-- System diagnostics
+- Service management (systemctl)
+- Log analysis (journalctl)
+- Troubleshooting
+
+### Usage
+
+```bash
+./service_status.sh ssh
+```
+
+### Example Output
+
+```bash
+Checking status for service: ssh
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2026-04-23 18:11:26 PDT; 31min ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+    Process: 513 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)
+   Main PID: 547 (sshd)
+      Tasks: 1 (limit: 2250)
+     Memory: 3.3M
+        CPU: 13ms
+     CGroup: /system.slice/ssh.service
+             └─547 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+
+Warning: some journal files were not opened due to insufficient permissions.
+Recent logs:
+Hint: You are currently not seeing messages from other users and the system.
+      Users in groups 'adm', 'systemd-journal' can see all messages.
+      Pass -q to turn off this notice.
+-- Journal begins at Sun 2022-09-25 15:20:34 PDT, ends at Thu 2026-04-23 18:42:27 PDT. --
+-- No entries --
+```
 
 ---
 
